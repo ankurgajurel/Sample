@@ -25,6 +25,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: Dockerfile
+          file: docker/Dockerfile.web
           push: true
-          tags: ankurgajurel/k8s-deploy:latest
+          tags: ankurgajurel/k8s-deploy:web
