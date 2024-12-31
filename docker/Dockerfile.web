@@ -1,0 +1,20 @@
+FROM node:18-alpine as builder
+WORKDIR /app
+
+RUN corepack enable
+RUN corepack prepare pnpm@7.18.0 --activate
+
+COPY ./package.json .
+COPY ./pnpm-lock.yaml .
+COPY pnpm-workspace.yaml .
+COPY turbo.json .
+
+COPY packages ./packages
+COPY apps/web ./apps/web
+
+RUN pnpm install
+RUN pnpm build
+
+EXPOSE 3000
+
+CMD ["pnpm", "start"]
